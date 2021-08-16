@@ -47,7 +47,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       env:{
-        API: API_LOCAL // API_LOCAL | API_PRODUCTION
+        API: API_PRODUCTION // API_LOCAL | API_PRODUCTION
       },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
@@ -100,12 +100,12 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Dialog', 'Notify', 'Loading']
+      plugins: ['Dialog', 'Notify', 'Loading', 'LocalStorage']
     },
 
     // animations: 'all', // --- includes all animations
     // https://v1.quasar.dev/options/animations
-    animations: [],
+    animations: ['fadeIn', 'fadeOut'],
 
     // https://v1.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
@@ -114,16 +114,16 @@ module.exports = function (/* ctx */) {
 
     // https://v1.quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
+      workboxPluginMode: 'InjectManifest', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Quasagram`,
+        name: `Quasagram - Share Your Experience`,
         short_name: `Quasagram`,
-        description: `A Quasar Framework app`,
+        description: `A Simple Instagram Clone - Made with Quasar`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#212121',
         icons: [
           {
             src: 'icons/icon-128x128.png',

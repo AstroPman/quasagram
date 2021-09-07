@@ -106,8 +106,11 @@ export default {
     locationSupported() {
       if ('geolocation' in navigator) return true
       return false
+    },
+    backgroundSyncSupported() {
+      if ('serviceWorker' in navigator && 'SyncManager' in window) return true
+      return false
     }
-
   },
   methods: {
     initCamera() {
@@ -228,10 +231,17 @@ export default {
         this.$q.loading.hide()
       }).catch(err => {
         console.log('err', err)
-        this.$q.dialog({
-          title: 'Error',
-          message: 'Sorry, could not create post...'
-        })
+        if (!navigator.onLine && this.backgroundSyncSupported) {          
+          // redirect to home page
+          this.$q.notify('Post created offline')
+          this.$router.push('/')
+        }
+        else {
+          this.$q.dialog({
+            title: 'Error',
+            message: 'Sorry, could not create post...'
+          })
+        }
         this.$q.loading.hide()
       })
     }
